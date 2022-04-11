@@ -1,0 +1,429 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="../reveal.js/css/reset.css">
+        <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="../reveal.js/css/theme/serif.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="../reveal.js/lib/css/solarized-light.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            code {border: 1px solid #bbb; padding: 2px 4px; margin-right: 4px; 
+            background: #fdf6e3;}
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<section>
+    <h3>Intro into python for data science</h3>
+    
+    <p>Start installing + about: <a href="http://y-t.io/1">http://y-t.io/1</a></p>
+    <p>Please fill out the poll: <a href="http://y-t.io/2">http://y-t.io/2</a></p>
+
+    <small>
+        What we will cover:<br/>
+        <ul><li>how to install python and start writing code</li>
+        <li>how to read code written by you or other people</li>
+        <li>how to use other people’s code</li>
+        <li>how to get through first errors to first plot</li></ul>
+    </small>
+</section>
+
+<section>
+    <section>
+        <h3>All the computing is about ones and zeroes</h3>
+
+        <pre><code class="hljs python">
+>>> "{0:b}".format(42)
+'101010'
+        </code></pre>
+
+        <p>
+            Meaning:<br/>
+            42 = 
+            1 &times; 2<sup>5</sup> + 
+            0 &times; 2<sup>4</sup> +
+            1 &times; 2<sup>3</sup> +
+            0 &times; 2<sup>2</sup> +
+            1 &times; 2<sup>1</sup> +
+            0 &times; 2<sup>0</sup>
+        </p>
+    </section>
+    <section>
+        <h3>All the computing is about ones and zeroes</h3>
+
+        <pre><code class="hljs python">
+>>> list(map(ord, "I🧡∞"))
+[73, 129505, 8734]
+        </code></pre>
+
+        <p>
+            Meaning:<br/>
+            letter <code>"I"</code> is encoded by number <code>73</code><br/>
+            emoji <code>"🧡"</code> is encoded by number <code>129505</code><br/>
+            symbol <code>"∞"</code> is encoded by number <code>8734</code>
+        </p>
+    </section>
+
+    <section>
+        <h3>Memory is taken care of</h3>
+
+        <ul>
+            <li>memory is sequential, i.e. address #2 follows address #1</li>
+            <li>everything is of known length</li>
+            <li>if you have some data, it's somewhere in the memory</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Memory is taken care of</h3>
+        <pre><code class="hljs python">
+>>> a = [1,2,3]
+>>> b = [1,2,3]
+>>> c = a
+>>> object.__repr__(a)
+'&lt;list object at 0x100c6bf08>'
+>>> object.__repr__(b)
+'&lt;list object at 0x100cad6c8>'
+>>> object.__repr__(c)
+'&lt;list object at 0x100c6bf08>'
+        </code></pre>
+
+        <p>
+            Meaning:<br/>
+            object <code>"a"</code> points to address <code>0x100c6bf08</code><br/>
+            object <code>"b"</code> points to address <code>0x100cad6c8</code><br/>
+            object <code>"c"</code> points to <b>the same</b> address as object <code>"a"</code>
+        </p>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Python: programming language and a tool</h3>
+
+        <p>What you downloaded is a python <em>program</em> to run your
+            code written in python <em>language</em>
+        </p>
+
+        <p>
+            A program operates in the context of:
+            <ul>
+                <li>input (variable data)</li>
+                <li>output (data, usually depends on the input)</li>
+                <li>state (everything else, e.g. file system)</li>
+            </ul>
+        </p>
+    </section>
+
+    <section>
+        <h3>Python as a language</h3>
+    
+        <ul>
+            <li>reads from top to bottom, from left to right</li>
+            <li>has sentences, called statements</li>
+            <li>has parts of speech</li>
+            <li>is hierarchical</li>
+            <li>can express same thing in lots of different ways</li>
+        </ul>
+
+        <pre><code class="hljs python">max_i, max = 0, array[0]
+for i, el in enumerate(array[1:]):
+    if el > max:
+        max_i = i + 1</code></pre>
+    </section>
+
+    <section>
+        <h3>Coding is a dialogue</h3>
+
+        <img src="images/python1.jpg"/>
+    </section>
+
+    <section>
+        <h3>Coding is a dialogue</h3>
+
+        <img src="images/python2.jpg" width="80%"/>
+    </section>
+
+    <section>
+        <h3>Abstract syntax tree (AST)</h3>
+        <pre><code class="hljs python">1 + 2 * 3 != (1 + 2) * 3</code></pre>
+        
+        <pre><code class="hljs python">max_i, max = 0, array[0]
+for i, el in enumerate(array[1:]):
+    if el > max:
+        max_i = i + 1</code></pre>
+
+        <img src="images/python-ast.png" width="70%" style="position:relative; top: -30px"/>
+    </section>
+
+    <section>
+        <h3>Abstract syntax tree (AST)</h3>
+
+        <p>Each node does something to the <em>state</em>, and has an <em>output</em><br/>
+        Python computes bottom-up by nodes.<br/>
+        So:</p>
+
+        <pre><code class="hljs python">x = (7 + 2) * 5</code></pre>
+        
+        is equivalent to:
+        <pre><code class="hljs python">x = (9) * 5</code></pre>
+    </section>
+
+    <section>
+        <h3>Parts of speech, <em>simple</em></h3>
+        <code>1</code> reads “number 1” or “integer 1”<br/>
+        <code>1.5</code> reads “number 1.5” or “float 1.5”<br/>
+        <code>"1"</code> or <code>'1'</code> reads “string "1"”<br/>
+        <code>"""1"""</code> reads “string "1"”<br/>
+        <code>True</code> reads “boolean true”<br/>
+        <code>False</code> reads “boolean true”<br/>
+        <code>None</code> reads just “none”
+    </section>
+
+    <section>
+        <h3>Parts of speech, <em>complex</em></h3>
+        <code>(1,2)</code> reads “tuple of numbers 1 and 2”<br/>
+        <code>(1,)</code> reads “tuple of number 1”<br/>
+        <code>[1,2]</code> reads “list of numbers 1 and 2”<br/>
+        <code>{1,2}</code> reads “set of numbers 1 and 2”<br/>
+        <code>{1:2}</code> reads “dictionary with key number 1 to value number 2”<br/>
+    </section>
+
+    <section>
+        <h3>Expressions, <em>references</em></h3>
+        <code>x</code> reads “value of object x”<br/>
+        <code>x.y</code> reads “value of attribute y of object x”<br/>
+        <code>x(1,2)</code> reads “call function x with parameters of numbers 1 and 2”<br/>
+        <code>x.y()</code> reads “call method y of object x with no parameters”
+    </section>
+
+    <section>
+        <h3>Expressions, <em>subscripts</em></h3>
+        <code>x[1]</code> reads “subscript object x with number 1” or 
+        more commonly “value of second element of list/tuple x”<br/>
+        <code>x["a"]</code> reads “subscript object x with string "a"” or
+        more commonly “value by key "a" from dictionary x”<br/>
+        <code>x[1:3]</code> reads “subscript object x with slice from 1 to 3” or
+        more commonly “take elements from 2nd to 4th of list/tuple x”<br/>
+    </section>
+
+    <section>
+        <h3>Expressions, <em>operators</em></h3>
+        Mathematical:<br/>
+        <code>x + y</code>, <code>x - y</code>, <code>x / y</code>, <code>x * y</code><br/>
+        <code>x ** y</code> for power, <code>x // y</code> for integer division<br/>
+        <code>x % y</code> for modulus of division<br/>
+        Comparisons:<br/>
+        <code>x > y</code>, <code>x >= y</code>, <code>x == y</code><br/>
+        Logical:<br/>
+        <code>x and y</code>, <code>x or y</code><br/>
+        <code>not x</code>, <code>x in y</code>
+    </section>
+
+    <section>
+        <h3>Sentence types, <em>aka statemenets</em></h3>
+        Assignment:<br/>
+        <code>x = 1</code><br/>
+        Conditions or if-statement:
+        <pre><code class="hljs python">if x > y:
+    print("Greater")
+elif x < y:
+    print("Less")
+else:
+    print("Equal?")</code></pre>
+    </section>
+
+    <section>
+            <h3>Sentence types, <em>loops</em></h3>
+            For-loop:
+            <pre><code class="hljs python">for item in collection:
+    print(item)
+else:
+    print("the end")</code></pre><br/>
+            While loop:<br/>
+            <pre><code class="hljs python">while x > 0:
+    x = x - 1
+else:
+    print("the end")</code></pre><br/>
+    </section>
+
+    <section>
+        <h3>Sentence types, <em>misc.</em></h3>
+        Expecting errors:
+        <pre><code class="hljs python">try:
+    maybe_works()
+except Exception as e:
+    print("well, it didn't")</code></pre><br/>
+        Imports (using code from other files):
+        <pre><code class="hljs python">import antigravity
+import pandas as pd
+from matplotlib import pyplot as plt</code></pre><br/>
+    </section>
+
+    <section>
+        <h3>Sentence types, <em>functions</em></h3>
+        You can define your function:
+        <pre><code class="hljs python">def index_of_max(array):
+    max_i, max = 0, array[0]
+    for i, el in enumerate(array[1:]):
+        if el > max:
+            max_i = i + 1
+    return max_i
+print(index_of_max([1,2,3]))
+print(index_of_max([]))</code></pre>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Errors</h3>
+
+        <p>EVERYBODY MAKES THEM</p>
+    </section>
+
+    <section>
+        <h3>Errors</h3>
+
+        <p>Switch to <a href="https://github.com/mxposed/dsn-intro/blob/master/2019-11-21-python-intro/Errors.ipynb">Errors notebook</a></p>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Data types</h3>
+
+        <p>Lists: a collection of different objects</p>
+        <pre><code class="hljs python">a = []
+a.append(1)     # a = [1]
+a.extend([2,3]) # a = [1,2,3]
+a.reverse()     # a = [3,2,1]
+a.index(1)      # 2 -------^
+a.pop()         # a = [3,2]
+del a[0]        # a = [2]</code></pre>
+    </section>
+
+    <section>
+        <h3>Data types</h3>
+
+        <p>Dictionaries: a mapping between keys and values</p>
+        <pre><code class="hljs python">a = {1:1, 2:4, 3:9, 4:16}
+a[5] = 25              # a = {1:1, 2:4, 3:9, 4:16, 5:25}
+a.extend({0:0, 1:-1})  # a = {1:-1, 2:4, 3:9, 4:16, 5:25, 0:0}
+del a[4]               # a = {1:-1, 2:4, 3:9, 5:25, 0:0}
+a.get(1)               # -1
+a.pop(2)               # 4; a = {1:-1, 3:9, 5:25, 0:0}
+list(a.keys())         # [1, 3, 5, 0]
+list(a.values())       # [-1, 9, 25, 0]
+list(a.items())        # [(1,-1),(3,9),(5,25),(0,0)]</code></pre>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Other people's code</h3>
+
+        <ul>
+            <li>distributed as packages (or libraries)</li>
+            <li>package has a <em>name</em> and a <em>version</em></li>
+            <li>versions change all the time</li>
+            <li>manage packages with <code>pip</code> (or <code>conda</code>)</li>
+            <li>work in projects and manage each project's packages independently with
+                <code>pipenv</code> (or <code>virtualenv</code> or <code>conda</code>)
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Most common packages:</h3>
+        <ul>
+            <li><code>numpy</code>: for effective computation and linear algebra</li>
+            <li><code>pandas</code>: for working with data in tables</li>
+            <li><code>matplotlib</code>: for plotting data</li>
+            <li><code>scikit-learn</code>: a collection of machine learning algorithms</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <h3>GitHub</h3>
+
+    <ul>
+        <li>essential for collaboration</li>
+        <li>backup of your project</li>
+        <li>sharing your project</li>
+        <li>very useful still for personal projects</li>
+    </ul>
+</section>
+
+<section>
+    <h3>A briefest example of plotting data</h3>
+
+    <p>See <a href="https://github.com/mxposed/dsn-intro/blob/master/2019-11-21-python-intro/Example.ipynb">Example notebook</a>
+    to see how <code>matplotlib</code> and <code>pandas</code>
+    can be used to produce basic plots</p>
+</section>
+
+<section>
+    <h3>NUIT workshops</h3>
+
+    <small>
+    Python: Text Analysis with NLTK (Natural Language ToolKit)<br/>
+    <b>Thursday, December 5; 1-4pm, Mudd Library 2210</b><br/><br/>
+
+    Biopython: Introduction-Chicago (familiarity with python)<br/>
+    <b>Monday, December 2; 1-4pm, Galter Health Sciences Library, Library Classroom, Level 2</b><br/><br/>
+
+    R: Data Manipulation with the Tidyverse<br/>
+    <b>Thursday, December 5; 9am-noon, Galter Health Sciences Library, Library Classroom, Level 2</b>
+</small>
+</section>
+
+<section>
+    <h3>Thank you</h3>
+
+    Come to Data Science Night slack<br/><br/><br/>
+
+    nikolay.markov@northwestern.edu<br/>
+    @nmarkov on slack
+</section>
+
+            </div>
+        </div>
+
+        <script src="../reveal.js/js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                transition: 'slide',
+                transitionSpeed: 'fast',
+                hash: 'true',
+                dependencies: [
+                    { src: '../reveal.js/plugin/markdown/marked.js' },
+                    { src: '../reveal.js/plugin/markdown/markdown.js' },
+                    { src: '../reveal.js/plugin/notes/notes.js', async: true },
+                    { src: '../reveal.js/plugin/highlight/highlight.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
