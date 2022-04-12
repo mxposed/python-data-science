@@ -31,23 +31,23 @@
             <div class="slides">
 
 <section>
-    <h3>Intro into python for data science</h3>
-    
-    <p>Start installing + about: <a href="http://y-t.io/1">http://y-t.io/1</a></p>
-    <p>Please fill out the poll: <a href="http://y-t.io/2">http://y-t.io/2</a></p>
-
+    <h3>Introduction into python<br/> for data science</h3>
     <small>
+        Lecture 1 of <a href="../">python for data science</a> course
+    </small>
+
+    <!-- <small>
         What we will cover:<br/>
         <ul><li>how to install python and start writing code</li>
         <li>how to read code written by you or other people</li>
         <li>how to use other people’s code</li>
         <li>how to get through first errors to first plot</li></ul>
-    </small>
+    </small> -->
 </section>
 
 <section>
     <section>
-        <h3>All the computing is about ones and zeroes</h3>
+        <h3>All computing is about<br/>ones and zeroes</h3>
 
         <pre><code class="hljs python">
 >>> "{0:b}".format(42)
@@ -66,7 +66,7 @@
         </p>
     </section>
     <section>
-        <h3>All the computing is about ones and zeroes</h3>
+        <h3>All computing is about<br/>ones and zeroes</h3>
 
         <pre><code class="hljs python">
 >>> list(map(ord, "I🧡∞"))
@@ -82,7 +82,7 @@
     </section>
 
     <section>
-        <h3>Memory is taken care of</h3>
+        <h3>Python takes care of memory</h3>
 
         <ul>
             <li>memory is sequential, i.e. address #2 follows address #1</li>
@@ -92,7 +92,7 @@
     </section>
 
     <section>
-        <h3>Memory is taken care of</h3>
+        <h3>Python takes care of memory</h3>
         <pre><code class="hljs python">
 >>> a = [1,2,3]
 >>> b = [1,2,3]
@@ -107,9 +107,9 @@
 
         <p>
             Meaning:<br/>
-            object <code>"a"</code> points to address <code>0x100c6bf08</code><br/>
-            object <code>"b"</code> points to address <code>0x100cad6c8</code><br/>
-            object <code>"c"</code> points to <b>the same</b> address as object <code>"a"</code>
+            object <code>"a"</code> is stored at address <code>0x100c6bf08</code><br/>
+            object <code>"b"</code> is stored at address <code>0x100cad6c8</code><br/>
+            object <code>"c"</code> is stored at <b>the same</b> address as <code>"a"</code>
         </p>
     </section>
 </section>
@@ -146,7 +146,7 @@
         <pre><code class="hljs python">max_i, max = 0, array[0]
 for i, el in enumerate(array[1:]):
     if el > max:
-        max_i = i + 1</code></pre>
+        max_i, max = i, el</code></pre>
     </section>
 
     <section>
@@ -168,7 +168,7 @@ for i, el in enumerate(array[1:]):
         <pre><code class="hljs python">max_i, max = 0, array[0]
 for i, el in enumerate(array[1:]):
     if el > max:
-        max_i = i + 1</code></pre>
+        max_i, max = i, el</code></pre>
 
         <img src="images/python-ast.png" width="70%" style="position:relative; top: -30px"/>
     </section>
@@ -176,8 +176,8 @@ for i, el in enumerate(array[1:]):
     <section>
         <h3>Abstract syntax tree (AST)</h3>
 
-        <p>Each node does something to the <em>state</em>, and has an <em>output</em><br/>
-        Python computes bottom-up by nodes.<br/>
+        <p>Each node does something to the <em>state</em>, and has an <em>output</em>.<br/>
+        Python computes bottom-up by nodes, replacing each node with its <em>output</em>.<br/>
         So:</p>
 
         <pre><code class="hljs python">x = (7 + 2) * 5</code></pre>
@@ -187,7 +187,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Parts of speech, <em>simple</em></h3>
+        <h3>Python parts of speech: <em>simple</em></h3>
         <code>1</code> reads “number 1” or “integer 1”<br/>
         <code>1.5</code> reads “number 1.5” or “float 1.5”<br/>
         <code>"1"</code> or <code>'1'</code> reads “string "1"”<br/>
@@ -198,7 +198,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Parts of speech, <em>complex</em></h3>
+        <h3>Python parts of speech: <em>complex</em></h3>
         <code>(1,2)</code> reads “tuple of numbers 1 and 2”<br/>
         <code>(1,)</code> reads “tuple of number 1”<br/>
         <code>[1,2]</code> reads “list of numbers 1 and 2”<br/>
@@ -207,7 +207,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Expressions, <em>references</em></h3>
+        <h3>Python expressions: <em>references</em></h3>
         <code>x</code> reads “value of object x”<br/>
         <code>x.y</code> reads “value of attribute y of object x”<br/>
         <code>x(1,2)</code> reads “call function x with parameters of numbers 1 and 2”<br/>
@@ -215,7 +215,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Expressions, <em>subscripts</em></h3>
+        <h3>Python expressions: <em>subscripts</em></h3>
         <code>x[1]</code> reads “subscript object x with number 1” or 
         more commonly “value of second element of list/tuple x”<br/>
         <code>x["a"]</code> reads “subscript object x with string "a"” or
@@ -225,7 +225,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Expressions, <em>operators</em></h3>
+        <h3>Python expressions: <em>operators</em></h3>
         Mathematical:<br/>
         <code>x + y</code>, <code>x - y</code>, <code>x / y</code>, <code>x * y</code><br/>
         <code>x ** y</code> for power, <code>x // y</code> for integer division<br/>
@@ -238,7 +238,7 @@ for i, el in enumerate(array[1:]):
     </section>
 
     <section>
-        <h3>Sentence types, <em>aka statemenets</em></h3>
+        <h3>Python sentence types, <em>aka statemenets</em></h3>
         Assignment:<br/>
         <code>x = 1</code><br/>
         Conditions or if-statement:
@@ -251,21 +251,21 @@ else:
     </section>
 
     <section>
-            <h3>Sentence types, <em>loops</em></h3>
-            For-loop:
-            <pre><code class="hljs python">for item in collection:
+        <h3>Python sentence types, <em>loops</em></h3>
+        For-loop:
+        <pre><code class="hljs python">for item in collection:
     print(item)
 else:
     print("the end")</code></pre><br/>
-            While loop:<br/>
-            <pre><code class="hljs python">while x > 0:
+        While loop:<br/>
+        <pre><code class="hljs python">while x > 0:
     x = x - 1
 else:
     print("the end")</code></pre><br/>
     </section>
 
     <section>
-        <h3>Sentence types, <em>misc.</em></h3>
+        <h3>Python sentence types, <em>misc.</em></h3>
         Expecting errors:
         <pre><code class="hljs python">try:
     maybe_works()
@@ -278,15 +278,16 @@ from matplotlib import pyplot as plt</code></pre><br/>
     </section>
 
     <section>
-        <h3>Sentence types, <em>functions</em></h3>
+        <h3>Python sentence types, <em>functions</em></h3>
         You can define your function:
         <pre><code class="hljs python">def index_of_max(array):
     max_i, max = 0, array[0]
     for i, el in enumerate(array[1:]):
         if el > max:
-            max_i = i + 1
-    return max_i
-print(index_of_max([1,2,3]))
+            max_i, max = i, el
+    return max_i</code></pre>
+        And then call them:
+        <pre><code class="hljs python">print(index_of_max([1,2,3]))
 print(index_of_max([]))</code></pre>
     </section>
 </section>
@@ -296,12 +297,8 @@ print(index_of_max([]))</code></pre>
         <h3>Errors</h3>
 
         <p>EVERYBODY MAKES THEM</p>
-    </section>
 
-    <section>
-        <h3>Errors</h3>
-
-        <p>Switch to <a href="https://github.com/mxposed/dsn-intro/blob/master/2019-11-21-python-intro/Errors.ipynb">Errors notebook</a></p>
+        <p>Switch to <a href="Errors.ipynb">Errors notebook</a></p>
     </section>
 </section>
 
@@ -345,7 +342,7 @@ list(a.items())        # [(1,-1),(3,9),(5,25),(0,0)]</code></pre>
             <li>versions change all the time</li>
             <li>manage packages with <code>pip</code> (or <code>conda</code>)</li>
             <li>work in projects and manage each project's packages independently with
-                <code>pipenv</code> (or <code>virtualenv</code> or <code>conda</code>)
+                <code>pip-tools</code><br/>(or <code>conda</code>)
             </li>
         </ul>
     </section>
@@ -371,39 +368,6 @@ list(a.items())        # [(1,-1),(3,9),(5,25),(0,0)]</code></pre>
         <li>very useful still for personal projects</li>
     </ul>
 </section>
-
-<section>
-    <h3>A briefest example of plotting data</h3>
-
-    <p>See <a href="https://github.com/mxposed/dsn-intro/blob/master/2019-11-21-python-intro/Example.ipynb">Example notebook</a>
-    to see how <code>matplotlib</code> and <code>pandas</code>
-    can be used to produce basic plots</p>
-</section>
-
-<section>
-    <h3>NUIT workshops</h3>
-
-    <small>
-    Python: Text Analysis with NLTK (Natural Language ToolKit)<br/>
-    <b>Thursday, December 5; 1-4pm, Mudd Library 2210</b><br/><br/>
-
-    Biopython: Introduction-Chicago (familiarity with python)<br/>
-    <b>Monday, December 2; 1-4pm, Galter Health Sciences Library, Library Classroom, Level 2</b><br/><br/>
-
-    R: Data Manipulation with the Tidyverse<br/>
-    <b>Thursday, December 5; 9am-noon, Galter Health Sciences Library, Library Classroom, Level 2</b>
-</small>
-</section>
-
-<section>
-    <h3>Thank you</h3>
-
-    Come to Data Science Night slack<br/><br/><br/>
-
-    nikolay.markov@northwestern.edu<br/>
-    @nmarkov on slack
-</section>
-
             </div>
         </div>
 
