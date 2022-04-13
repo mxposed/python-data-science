@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="../reveal.js/css/reset.css">
+        <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="../reveal.js/css/theme/serif.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="../reveal.js/lib/css/solarized-light.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <style>
+            code {border: 1px solid #bbb; padding: 2px 4px; margin-right: 4px; 
+            background: #fdf6e3;}
+            li li {font-size: 80%; line-height: 1em;}
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<section>
+    <h3>Introduction into pandas</h3>
+    <small>
+        Lecture 2 of <a href="../">python for data science</a> course
+    </small>
+</section>
+<section>
+    <h3>Agenda</h3>
+    <ul>
+        <li>python recap</li>
+        <li>python omitted things
+            <ul>
+                <li>classes</li>
+                <li>list comprehensions</li>
+                <li>string literals</li>
+                <li>other operators</li>
+                <li>other statements</li>
+                <li>builtins</li>
+            </ul>
+        </li>
+        <li>pandas introduction
+            <ul>
+                <li>DataFrame, Series, Index</li>
+                <li>selecting data</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <section>
+        <h3>Python recap</h3>
+
+        Python as a language:
+        <ul>
+            <li>has parts of speech (numbers, strings, booleans…)</li>
+            <li>has hierarchical expressions</li>
+            <li>has sentence types (assignment, if, for, def…)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Important expressions</h3>
+
+        <ul style="line-height: 1.4em !important;">
+            <li>attribute reference: <code>var.attr</code></li>
+            <li>indexing a variable with something: 
+                <ul>
+                    <li>e. g. number 3: <code>var[3]</code></li>
+                    <li>or string Aa: <code>var["Aa"]</code></li>
+                </ul></li>
+            <li>calling a function: <code>func(1, "Bb")</code></li>
+            <li>attribute function is a method:<br/><code>var.func(False)</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Data types</h3>
+
+        <p>Lists: a collection of different objects</p>
+        <pre><code class="hljs python">a = []
+a.append(1)     # a = [1]
+a.extend([2,3]) # a = [1,2,3]
+a.reverse()     # a = [3,2,1]
+a.index(1)      # 2 -------^
+a.pop()         # a = [3,2]
+del a[0]        # a = [2]</code></pre>
+        <p>E.g. storing read books or published papers</p>
+    </section>
+
+    <section>
+        <h3>Data types</h3>
+
+        <p>Dictionaries: a mapping between keys and values</p>
+        <pre><code class="hljs python">a = {1:1, 2:4, 3:9, 4:16}
+a[5] = 25              # a = {1:1, 2:4, 3:9, 4:16, 5:25}
+a.extend({0:0, 1:-1})  # a = {1:-1, 2:4, 3:9, 4:16, 5:25, 0:0}
+del a[4]               # a = {1:-1, 2:4, 3:9, 5:25, 0:0}
+a.get(1)               # -1
+a.pop(2)               # 4; a = {1:-1, 3:9, 5:25, 0:0}
+list(a.keys())         # [1, 3, 5, 0]
+list(a.values())       # [-1, 9, 25, 0]
+list(a.items())        # [(1,-1),(3,9),(5,25),(0,0)]</code></pre>
+        <p>E.g. storing a phonebook</p>
+    </section>
+
+    <section>
+        <h3>Lists vs Dictionaries</h3>
+        Lists:<br/>
+        <ul>
+            <li>sequential: always have order of elements</li>
+            <li>can have duplicates</li>
+        </ul>
+        Dictionaries:<br/>
+        <ul>
+            <li>order does not matter</li>
+            <li>cannot have duplicate keys: new value for a key will overwrite the previous</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h3>Classes</h3>
+
+        <pre><code class="hljs python">a = []
+a.append(1)     # a = [1]
+a.extend([2,3]) # a = [1,2,3]</code></pre>
+        
+        <p>What is the relationship between <code>a</code> and a List?</p>
+        <p>What is <code>append</code> or <code>extend</code>?</p>
+    </section>
+
+    <section>
+        <h3>Classes: data and behaviour together</h3>
+
+        <p>Author defines how data is stored and how it should be used: an <em>interface</em></p>
+
+        <p>Example: checking out a book at a library</p>
+        <ul>
+            <li>each book has an author and a title</li>
+            <li>you can check out a book only providing your library membership number</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Class instances: data and behaviour together</h3>
+
+        <p>User's data that follows the class author's standard</p>
+
+        <pre><code class="hljs python">mybook = pick_random_book()
+mybook.title           # "Robinson Crusoe"
+mybook.author          # "Daniel Defoe"
+mybook.checkout()      # Error: no account specified
+mybook.checkout(1234)  # "Thank you for using our library"</code></pre>
+    </section>
+
+    <section>
+        <h3>Classes: data and behaviour together</h3>
+
+        <p>Lists and dictionaries are built-in classes. Strings as well, and many others</p>
+
+        <p>To check which class (or type) is a variable:</p>
+        <pre><code class="hljs python">>>> a = "hello"
+>>> type(a)
+&lt;class 'str'&gt;</code></pre>
+    </section>
+</section>
+
+<section>
+    <h3>Switch to pandas notebook</h3>
+</section>
+            </div>
+        </div>
+
+        <script src="../reveal.js/js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                transition: 'slide',
+                transitionSpeed: 'fast',
+                hash: 'true',
+                dependencies: [
+                    { src: '../reveal.js/plugin/markdown/marked.js' },
+                    { src: '../reveal.js/plugin/markdown/markdown.js' },
+                    { src: '../reveal.js/plugin/notes/notes.js', async: true },
+                    { src: '../reveal.js/plugin/highlight/highlight.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
