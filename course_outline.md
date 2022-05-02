@@ -70,4 +70,22 @@
   * `str.startswith(x)` to test if each value starts with string `x`
   * `str.contains(x)` to test if each value contrains string `x`
 
+# Lecture 3. Pandas: values, overview functions
+1. Pandas dtypes
+  * different data in different columns
+  * different operations for data
+2. Overview methods
+  * for string/categorical types
+  * for number types
+
+
+
+
+
+
+
+
+
+
+
 
