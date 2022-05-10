@@ -20,7 +20,7 @@ pandas
 - modifying
 - grouping
 - plotting
-- summary stats
++ summary stats
 - merging tables
 - pandas strings
 - pandas dates
