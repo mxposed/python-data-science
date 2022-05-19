@@ -78,6 +78,15 @@
   * for string/categorical types
   * for number types
 
+# Lecture 4. Pivot/melt
+
+
+Goal: compute world population
+Classwork: compute world4_region populations
+
+# Lecture 5. Groupby
+
+
 
 
 
